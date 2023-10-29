@@ -20,10 +20,30 @@ def test_non():
             print("antre non itilizatè a sans espas ni majiskil : ")
 
 non_itilizatè=test_non()
+file_name='file.pk1'
+try:
+    with open(file_name, 'rb') as fichier:
+        data = pickle.load(fichier)
+except (FileNotFoundError, EOFError):
+    data = {}
+with open(file_name, 'wb') as fichier:
+    pickle.dump(data, fichier)
+    
+with open(file_name, 'rb') as fichier:
+        data = pickle.load(fichier)
+        
+if not non_itilizatè in data:
+    data[non_itilizatè]=0
+    with open(file_name, 'wb') as fichier:
+        pickle.dump(data, fichier)
+with open(file_name, 'rb') as fichier:
+    data = pickle.load(fichier)
 
 while True:
     nomb_ordi=5
     tantativ=0;chans=5;score=0
+    ansyen_sko=data[non_itilizatè]
+    nouvo_sko=ansyen_sko
     while chans>0:
         try:
             nomb_user=int(input(f" {non_itilizatè} antre yon nomb ant {min} ak {max} :"))
@@ -36,6 +56,10 @@ while True:
                     else:
                         score +=30*(chans)
                     nouvo_sko +=score
+                    data[non_itilizatè]=nouvo_sko
+                    with open(file_name,'wb') as fichier:
+                        pickle.dump(data,fichier)
+
                     print(f"bravo {non_itilizatè} !!!\n\n ou gnyn sou {tantativ} tantativ ou fè yon sko {score} pwen nouvo sko a se {nouvo_sko}\n\n")
                     break
                 else:
