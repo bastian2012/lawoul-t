@@ -10,15 +10,18 @@ def test_space(chaine):
     if " " in chaine:
         return True
     return False
-
+def clear():
+    os.system("clear")
 def test_non():
     while True:
         non_itilizatè=input("antre yn non itilizatè : ")
         if not test_maj(non_itilizatè) and not test_space(non_itilizatè):
+            clear()
             return non_itilizatè
         else:
+            clear()
             print("antre non itilizatè a sans espas ni majiskil : ")
-
+    
 non_itilizatè=test_non()
 file_name='file.pk1'
 
@@ -30,11 +33,9 @@ def ecriture(file_name,data):
     with open(file_name, 'wb') as fichier:
         pickle.dump(data, fichier)
 
-def clear():
-    os.system("clear")
 
-def eta_jwèt(ansyen_sko,sko,nouvo_sko):
-    print(f"\nNon itilizatè : {non_itilizatè} \tansyen sko :{ansyen_sko}\t\t sko pati a : {sko}\t\t nouvo sko : {nouvo_sko}")
+def eta_jwèt(ansyen_sko,sko,nouvo_sko,chans):
+    print(f"\nNon itilizatè : {non_itilizatè.upper()} \t\tansyen sko :{ansyen_sko}\t\t sko pati a : {sko}\t\t nouvo sko : {nouvo_sko}\t\tchans : {chans}\n")
 
 
 try:
@@ -57,9 +58,9 @@ while True:
     nouvo_sko=ansyen_sko
     while chans>0:
         if chans==5:
-            eta_jwèt(ansyen_sko,score,nouvo_sko)
+            eta_jwèt(ansyen_sko,score,nouvo_sko,chans)
         try:
-            nomb_user=int(input(f" {non_itilizatè} antre yon nomb ant {min} ak {max} :"))
+            nomb_user=int(input(f" {non_itilizatè.upper()} antre yon nomb ant {min} ak {max} :"))
             if nomb_user>=min and nomb_user <= max:
                 tantativ+=1;chans-=1
                 if nomb_user==nomb_ordi:
@@ -71,23 +72,23 @@ while True:
                     nouvo_sko +=score
                     data[non_itilizatè]=nouvo_sko
                     ecriture(file_name,data)
-                    eta_jwèt(ansyen_sko,score,nouvo_sko)
-                    print(f"bravo {non_itilizatè} !!!\n\n ou gnyn sou {tantativ} tantativ ou fè yon sko {score} pwen nouvo sko a se {data[non_itilizatè]}\n\n")
+                    chans=0
+                    eta_jwèt(ansyen_sko,score,nouvo_sko,chans)
+                    print(f"bravo {non_itilizatè.upper()} !!!\n\n ou gnyn sou {tantativ} tantativ ou fè yon sko {score} pwen nouvo sko a se {data[non_itilizatè]}\n")
                     break
                 else:
                     clear()
-                    eta_jwèt(ansyen_sko,score,nouvo_sko)
+                    eta_jwèt(ansyen_sko,score,nouvo_sko,chans)
                     if nomb_ordi<nomb_user:
-                        print(f"ou pèdi {non_itilizatè} !!\n sa ou chwazi a pi gro pase nomb ki soti nan tiraj la\nou rete {chans} chans. sko ou se {score} pwen\n")
+                        print(f"ou pèdi {non_itilizatè.upper()} !!\n sa ou chwazi a pi gro pase nomb ki soti nan tiraj la\nou rete {chans} chans. \n")
                     else:
-                        print(f" {non_itilizatè} ou pèdi !!\n\n sa ou chwazi a pi piti pase nomb ki soti nan tiraj la\n\nou rete {chans} chans. sko ou se {score} pwen\n\n")
+                        print(f" {non_itilizatè.upper()} ou pèdi !!\n\n sa ou chwazi a pi piti pase nomb ki soti nan tiraj la\n\nou rete {chans} chans. sko ou se {score} pwen\n")
             else:
                 clear()
-                
         except:
             os.system("clear")
             print("sa ou antre a pa yon nomb !!!\n")
-    print(f"\n {non_itilizatè} nomb kache a se te {nomb_ordi} ")
+    print(f"{non_itilizatè.upper()} nomb kache a se te {nomb_ordi} ")
     kontinye=input(f"\n1- peze K pou'w soti nan jwèt la\n2- nenpot lot touch pou'w kontinye  :")
     if kontinye.lower()=="k":
         break
