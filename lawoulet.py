@@ -1,5 +1,5 @@
 import random,os,pickle
-max=50;min=0;nouvo_sko=0;ansyen_sko=0
+max=10;min=0;nouvo_sko=0;ansyen_sko=0
 def test_maj(chaine):
     for i in chaine:
         if i.isupper():
@@ -10,8 +10,10 @@ def test_space(chaine):
     if " " in chaine:
         return True
     return False
+
 def clear():
     os.system("clear")
+clear()
 def test_non():
     while True:
         non_itilizatè=input("antre yn non itilizatè : ")
@@ -29,13 +31,13 @@ def lecture():
     with open(file_name, 'rb') as fichier:
         data = pickle.load(fichier)
     return(data)
+
 def ecriture(file_name,data):
     with open(file_name, 'wb') as fichier:
         pickle.dump(data, fichier)
 
-
 def eta_jwèt(ansyen_sko,sko,nouvo_sko,chans):
-    print(f"\nNon itilizatè : {non_itilizatè.upper()} \t\tansyen sko :{ansyen_sko}\t\t sko pati a : {sko}\t\t nouvo sko : {nouvo_sko}\t\tchans : {chans}\n")
+    print(f"Non itilizatè : {non_itilizatè.upper()} \t\tansyen sko :{ansyen_sko}\t\t sko pati a : {sko}\t\t nouvo sko : {nouvo_sko}\t\tchans : {chans}\n")
 
 
 try:
@@ -52,7 +54,8 @@ if not non_itilizatè in data:
 data=lecture()
 
 while True:
-    nomb_ordi=5
+    clear()
+    nomb_ordi=random.randint(min,max)
     tantativ=0;chans=5;score=0
     ansyen_sko=data[non_itilizatè]
     nouvo_sko=ansyen_sko
@@ -74,15 +77,15 @@ while True:
                     ecriture(file_name,data)
                     chans=0
                     eta_jwèt(ansyen_sko,score,nouvo_sko,chans)
-                    print(f"bravo {non_itilizatè.upper()} !!!\n\n ou gnyn sou {tantativ} tantativ ou fè yon sko {score} pwen nouvo sko a se {data[non_itilizatè]}\n")
+                    print(f"bravo {non_itilizatè.upper()} !!!\n\n ou gnyn sou {tantativ} tantativ\n")
                     break
                 else:
                     clear()
                     eta_jwèt(ansyen_sko,score,nouvo_sko,chans)
                     if nomb_ordi<nomb_user:
-                        print(f"ou pèdi {non_itilizatè.upper()} !!\n sa ou chwazi a pi gro pase nomb ki soti nan tiraj la\nou rete {chans} chans. \n")
+                        print(f"ou pèdi {non_itilizatè.upper()} !!\n sa ou chwazi a pi gro pase nomb ki soti nan tiraj la\n")
                     else:
-                        print(f" {non_itilizatè.upper()} ou pèdi !!\n\n sa ou chwazi a pi piti pase nomb ki soti nan tiraj la\n\nou rete {chans} chans. sko ou se {score} pwen\n")
+                        print(f" {non_itilizatè.upper()} ou pèdi !!\n\n sa ou chwazi a pi piti pase nomb ki soti nan tiraj la\n")
             else:
                 clear()
         except:
